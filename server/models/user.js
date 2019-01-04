@@ -91,6 +91,16 @@ UserSchema.statics.findByCredentials = function findByCredentials(email, passwor
   });
 };
 
+UserSchema.methods.removeToken = function removeToken(token) {
+  const user = this;
+
+  return user.update({
+    $pull: {
+      tokens: { token },
+    },
+  });
+};
+
 UserSchema.pre('save', function preSaver(next) {
   const user = this;
 
