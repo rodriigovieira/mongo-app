@@ -5,7 +5,8 @@
         "consistent-return": 1,
         "no-unused-vars": 1,
         "comma-dangle": 1,
-        "object-curly-newline": 0
+        "object-curly-newline": 0,
+        "semi": 1
     },
     "env": {
         "browser": true,
