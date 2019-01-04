@@ -3,20 +3,21 @@ require('./config/config');
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
-const {ObjectID} = require('mongodb');
+const bcrypt = require('bcryptjs');
+const { ObjectID } = require('mongodb');
 
-var {mongoose} = require('./db/mongoose');
-var {Todo} = require('./models/todo');
-var {User} = require('./models/user');
-var {authenticate} = require('./middleware/authenticate');
+const { mongoose } = require('./db/mongoose');
+const { Todo } = require('./models/todo');
+const { User } = require('./models/user');
+const { authenticate } = require('./middleware/authenticate');
 
-var app = express();
+const app = express();
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
 app.post('/todos', (req, res) => {
-  var todo = new Todo({
+  const todo = new Todo({
     text: req.body.text
   });
 
@@ -108,7 +109,22 @@ app.post('/users', (req, res) => {
     res.header('x-auth', token).send(user);
   }).catch((e) => {
     res.status(400).send(e);
-  })
+  });
+});
+
+app.post('/users/login', (req, res) => {
+  const body = _.pick(req.body, ['email', 'password']);
+
+  User.findByCredentials(body.email, body.password)
+    .then((user) => {
+      return user.generateAuthToken()
+        .then((token) => {
+          res.header('x-auth', token).send(user);
+        });
+    })
+    .catch((e) => {
+      res.status(400).send(e);
+    });
 });
 
 app.get('/users/me', authenticate, (req, res) => {
@@ -119,4 +135,4 @@ app.listen(port, () => {
   console.log(`Started up at port ${port}`);
 });
 
-module.exports = {app};
+module.exports = { app };
