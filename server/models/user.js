@@ -42,10 +42,10 @@ UserSchema.methods.toJSON = function () {
   return _.pick(userObject, ['_id', 'email']);
 };
 
-UserSchema.methods.generateAuthToken = function () {
+UserSchema.methods.generateAuthToken = function generateAuthToken() {
   const user = this;
   const access = 'auth';
-  const token = jwt.sign({_id: user._id.toHexString(), access}, 'abc123').toString();
+  const token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();
 
   user.tokens.push({ access, token });
 
@@ -54,20 +54,20 @@ UserSchema.methods.generateAuthToken = function () {
   });
 };
 
-UserSchema.statics.findByToken = function (token) {
-  var User = this;
-  var decoded;
+UserSchema.statics.findByToken = function findByToken(token) {
+  const User = this;
+  let decoded;
 
   try {
-    decoded = jwt.verify(token, 'abc123');
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
   } catch (e) {
     return Promise.reject();
   }
 
   return User.findOne({
-    '_id': decoded._id,
+    _id: decoded._id,
     'tokens.token': token,
-    'tokens.access': 'auth'
+    'tokens.access': 'auth',
   });
 };
 
