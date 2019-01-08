@@ -3,11 +3,11 @@ require('./config/config');
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
-// const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const { ObjectID } = require('mongodb');
 const path = require('path');
 
-// const { mongoose } = require('./db/mongoose');
+const { mongoose } = require('./db/mongoose');
 const { Todo } = require('./models/todo');
 const { User } = require('./models/user');
 const { authenticate } = require('./middleware/authenticate');

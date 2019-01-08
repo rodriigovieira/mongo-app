@@ -1,5 +1,7 @@
 This is a simple todo-app without any UI made following the REST API standard.
 
+There's a live version of the application at https://mongo-start-project.herokuapp.com/. If you prefer to install it locally, follow the Installation instructions. Otherwise, go straigth to the Usage section.
+
 # Installation 
 
 First, make sure you have node installed on your machine.
@@ -28,7 +30,11 @@ yarn start
 
 The app will start automatically at port 3000.
 
+The API requests can be made with your favorite client, although a UI-rich client such as Postman or Insomnia is recommended. The POST requests ought to be made sending data with JSON. Clearer instructions are provided bellow.
+
 You can make the following requests:
+
+### Authentication Requests
 
 **POST /users** - create a user. Example:
 
@@ -52,4 +58,14 @@ After creating the user, the x-auth token will be returned in the Headers sectio
 
 If the data inserted is accurate, the x-auth token will be returned in the Headers section. You can refer to this route in case you would like to know your x-auth token.
 
+**GET /users/me** - return the user data. 
 
+For this request to work, it's necessary that you specifiy the x-auth token in the Header section. You can refer to the previous requests to know how to find your x-auth token.
+
+This request will return the user id and email.
+
+**DELETE /users/me/token** - remove the user's token in the database.
+
+This request will remove the token in the database, essentialy logging out the user. To get a new token, just make another POST request at /users/login and a new token will be generated.
+
+Same as before: it's necessary to specify the x-auth token in the Headers section.
