@@ -9,7 +9,7 @@ First, make sure you have node installed on your machine.
 Then, clone the project. Run:
 
 ```
-git clone https://github.com/rodriigovieira/mongo-app.git
+git clone https://github.com/rodriigovieira/todo-app.git
 ```
 
 Second, install all project dependencies. Run:
