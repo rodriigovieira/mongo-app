@@ -1,6 +1,6 @@
-This is a simple todo-app without any UI made following the REST API standard.
+This is a simple todo-app without any UI made following the REST API standard. Made as oriented by Andrew Mead in his NodeJS course.
 
-There's a live version of the application at https://mongo-start-project.herokuapp.com/. If you prefer to install it locally, follow the Installation instructions. Otherwise, go straigth to the Usage section.
+There's a live version of the application at http://todo.rodrigovieira.work. If you prefer to install it locally, follow the Installation instructions. Otherwise, go straigth to the Usage section.
 
 # Installation 
 
