@@ -1,7 +1,5 @@
 This is a simple todo-app without any UI made following the REST API standard. Made as oriented by Andrew Mead in his NodeJS course.
 
-There's a live version of the application at http://todo.rodrigovieira.work. If you prefer to install it locally, follow the Installation instructions. Otherwise, go straigth to the Usage section.
-
 # Installation 
 
 First, make sure you have node installed on your machine.
